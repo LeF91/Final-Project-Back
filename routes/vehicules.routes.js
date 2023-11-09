@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Vehicule = require("../models/Vehicule.model");
 
-app.get("/api/vehicules", (req, res) => {
+router.get("/api/vehicules", (req, res) => {
   Vehicule.find({})
     .then((vehicules) => {
       console.log("Retrieved cars", vehicules);

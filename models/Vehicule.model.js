@@ -35,3 +35,7 @@ const vehiculeSchema = new Schema({
     // Price: {}
   },
 });
+
+const Vehicule = model("Vehicule", vehiculeSchema);
+
+module.exports = Vehicule;
