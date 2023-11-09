@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const { Schema, model } = require("mongoose");
 
 const commentSchema = new Schema({
-  user: { type: ObjectId, required: true },
+  user: { type: Schema.Types.ObjectId, required: true },
 
-  vehicule: { type: ObjectId, required: true },
+  vehicule: { type: Schema.Types.ObjectId, required: true },
 
   content: { type: String, required: true },
 });
