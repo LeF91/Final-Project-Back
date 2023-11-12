@@ -10,6 +10,11 @@ router.get("/", async (req, res, next) => {
 
 router.use("/auth", require("./auth.routes"));
 
+router.use("/vehicules", require("./vehicules.routes"));
+router.use("/comments", require("./comments.routes"));
+
+// router.use("/user", require("./user.routes"));
+
 // router.use(isAuthenticated);
 
 module.exports = router;

@@ -24,4 +24,17 @@ const isAuthenticated = async (req, res, next) => {
   }
 };
 
-module.exports = isAuthenticated;
+async function isAdmin(req, res, next) {
+  try {
+    const findUser = await User.findById(req.userId);
+    if (findUser.role === "admin") {
+      return next();
+    } else {
+      return res.status(401).json({ message: "not authorized" });
+    }
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = { isAuthenticated, isAdmin };

@@ -1,65 +1,75 @@
 const router = require("express").Router();
 const Comment = require("../models/Comment.model");
+const { isAuthenticated } = require("../middleware/authMiddlewares");
 
-app.get("/api/comments", (req, res) => {
-  Comment.find({})
+router.use(isAuthenticated);
+
+// modifier la get pour commentaire
+router.get("/:carId", (req, res) => {
+  Comment.find({ vehicule: req.params.carId })
     .then((comments) => {
       console.log("Retrieved cars", comments);
       res.json(comments);
     })
     .catch((error) => {
       console.log(error, "Error to find cars", error);
-      res.status(500).send({ error: "Failed to retrieve cars" });
+      next(error);
     });
 });
 
-app.post("/api/comments", async (req, res, next) => {
+router.post("/:carId", async (req, res, next) => {
   const comment = { ...req.body };
+  comment.user = req.userId;
+  comment.vehicule = req.params.carId;
   Comment.create(comment)
     .then((createdcomment) => {
       res.status(201).json(createdcomment);
       console.log("Car created");
     })
     .catch((error) => {
-      res.send(error);
+      next(error);
     });
 });
 
-app.get("/api/comment/:commentId", async (req, res) => {
-  const { commentId } = req.params;
-  Comment.findById(commentId)
-    .then((comment) => {
-      console.log("Retrieved comment ->", comment);
-      res.status(200).json(comment);
-    })
-    .catch((error) => {
-      console.log(error, "Error to find cars", error);
-      res.status(500).send({ error: "Failed to retrieve cars" });
-    });
-});
+// router.get("/:commentId", async (req, res) => {
+//   const { commentId } = req.params;
+//   Comment.findById(commentId)
+//     .then((comment) => {
+//       console.log("Retrieved comment ->", comment);
+//       res.status(200).json(comment);
+//     })
+//     .catch((error) => {
+//       console.log(error, "Error to find cars", error);
+//       res.status(500).send({ error: "Failed to retrieve cars" });
+//     });
+// });
 
-app.put("/api/comments/:commentId", (req, res) => {
+router.put("/:commentId", (req, res) => {
   const { commentId } = req.params;
-  Comment.findByIdAndUpdate(commentId, req.body, { new: true })
+  Comment.findOneAndUpdate({ user: req.userId, _id: commentId }, req.body, {
+    new: true,
+  })
     .then((comment) => {
       console.log("Updating cars ->", comment);
       res.status(204).json(comment);
     })
     .catch((error) => {
       console.error("Error while updating cars ->", error);
-      res.status(500).send({ error: "Failed to update cars" });
+      next(error);
     });
 });
 
-app.delete("/api/comments/:commentId", (req, res) => {
+router.delete("/:commentId", (req, res) => {
   const { commentId } = req.params;
-  Comment.findByIdAndDelete(commentId)
+  Comment.findOnedAndDelete({ user: req.userId, _id: commentId })
     .then((comment) => {
       console.log("Deleting cars ->", comment);
       res.status(204).send();
     })
     .catch((error) => {
       console.error("Error while deleting cars ->", error);
-      res.status(500).send({ error: "Failed to delete cars" });
+      next(error);
     });
 });
+
+module.exports = router;

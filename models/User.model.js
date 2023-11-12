@@ -19,10 +19,11 @@ const userSchema = new Schema({
   role: {
     enum: ["admin", "user"],
     type: String,
+    default: "user",
   },
 
-  adress: { type: String, required: true },
-  // Only departement
+  departement: { type: String, required: true },
+  // form dans le front
 });
 
 const User = model("User", userSchema);

@@ -2,37 +2,37 @@ const mongoose = require("mongoose");
 const { Schema, model } = require("mongoose");
 
 const vehiculeSchema = new Schema({
+  image: { type: String, required: true },
   brand: { type: String, required: true },
 
   model: {
     name: { type: String, required: true },
-    year: { type: Number, required: true },
+    creationYear: { type: Date, required: true },
+    productionStop: { type: Date },
   },
 
   motorisation: {
     name: { type: String, required: true },
     energy: { type: String, required: true },
-    power: { type: Number, required: true },
+    power: { type: String, required: true },
   },
 
   category: {
-    name: {
-      type: String,
-      enum: [
-        "4x4",
-        "SUV",
-        "citadine",
-        "berline",
-        "break",
-        "cabriolet",
-        "coupe",
-        "monospace",
-        "sport",
-      ],
-      required: true,
-    },
+    type: String,
+    enum: [
+      "4x4",
+      "SUV",
+      "citadine",
+      "berline",
+      "break",
+      "cabriolet",
+      "coupe",
+      "monospace",
+      "sport",
+    ],
+    required: true,
 
-    // Price: {}
+    price: { type: Number, min: 0 },
   },
 });
 

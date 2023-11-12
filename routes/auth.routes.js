@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
  * ! All the routes are prefixed by /api
  */
 
-const isAuthenticated = require("./../middleware/authMiddlewares");
+const { isAuthenticated } = require("./../middleware/authMiddlewares");
 const saltRounds = 12;
 
 /**
@@ -64,14 +64,14 @@ router.post("/login", async (req, res, next) => {
     const { email, password } = req.body;
     const foundUser = await User.findOne({ email }).select("password username");
     if (!foundUser) {
-      return res.status(400).json({ message: "Wrong credentials" });
+      next(error);
     }
     const isPasswordCorrect = await bcrypt.compare(
       password,
       foundUser.password
     );
     if (!isPasswordCorrect) {
-      return res.status(400).json({ message: "Wrong credentials" });
+      next(error);
     }
 
     const payload = { _id: foundUser._id };
