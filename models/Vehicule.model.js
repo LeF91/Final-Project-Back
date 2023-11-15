@@ -31,9 +31,9 @@ const vehiculeSchema = new Schema({
       "sport",
     ],
     required: true,
-
-    price: { type: Number, min: 0 },
   },
+
+  price: { type: Number, min: 0 },
 });
 
 const Vehicule = model("Vehicule", vehiculeSchema);
