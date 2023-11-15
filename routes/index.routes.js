@@ -1,5 +1,5 @@
 const router = require("express").Router();
-// const { isAuthenticated } = require("./../middlewares/authMiddlewares");
+const { isAuthenticated } = require("../middleware/authMiddlewares");
 
 /**
  * ! All the routes are prefixed by /api
@@ -9,12 +9,10 @@ router.get("/", async (req, res, next) => {
 });
 
 router.use("/auth", require("./auth.routes"));
-
+router.use(isAuthenticated);
 router.use("/vehicule", require("./vehicule.routes"));
 router.use("/comments", require("./comments.routes"));
 
-// router.use("/user", require("./user.routes"));
-
-// router.use(isAuthenticated);
+router.use("/:id", require("./user.routes"));
 
 module.exports = router;

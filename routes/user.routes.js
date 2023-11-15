@@ -3,7 +3,7 @@ const User = require("../models/User.model");
 
 router.get("/", async (req, res, next) => {
   try {
-    const users = await User.find().select("email");
+    const users = await User.find().select("username");
     res.json(users);
   } catch (error) {
     next(error);
@@ -14,6 +14,16 @@ router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
   try {
     const oneUser = await User.findOne({ _id: id });
+    res.json(oneUser);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/user/:username", async (req, res, next) => {
+  const { username } = req.params;
+  try {
+    const oneUser = await User.findOne({ username: username });
     res.json(oneUser);
   } catch (error) {
     next(error);
