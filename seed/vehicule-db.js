@@ -340,6 +340,167 @@ const mockData = [
     category: "SUV",
     price: 70000,
   },
+  {
+    image: "url_image_21",
+    brand: "Renault",
+    model: {
+      name: "Clio",
+      creationYear: new Date("1990-01-01"),
+      productionStop: null,
+    },
+    motorisation: {
+      name: "E-TECH",
+      energy: "Hybride",
+      power: "140 hp",
+    },
+    category: "citadine",
+    price: 22000,
+  },
+  {
+    image: "url_image_22",
+    brand: "Peugeot",
+    model: {
+      name: "208",
+      creationYear: new Date("2012-01-01"),
+      productionStop: null,
+    },
+    motorisation: {
+      name: "PureTech",
+      energy: "Essence",
+      power: "130 hp",
+    },
+    category: "citadine",
+    price: 25000,
+  },
+  {
+    image: "url_image_23",
+    brand: "Citroën",
+    model: {
+      name: "C3",
+      creationYear: new Date("2002-01-01"),
+      productionStop: null,
+    },
+    motorisation: {
+      name: "PureTech",
+      energy: "Essence",
+      power: "110 hp",
+    },
+    category: "citadine",
+    price: 20000,
+  },
+  {
+    image: "url_image_24",
+    brand: "Volkswagen",
+    model: {
+      name: "Golf",
+      creationYear: new Date("1974-01-01"),
+      productionStop: null,
+    },
+    motorisation: {
+      name: "e-Golf",
+      energy: "Électrique",
+      power: "136 hp",
+    },
+    category: "compacte",
+    price: 30000,
+  },
+  {
+    image: "url_image_25",
+    brand: "Toyota",
+    model: {
+      name: "Yaris",
+      creationYear: new Date("1999-01-01"),
+      productionStop: null,
+    },
+    motorisation: {
+      name: "Hybrid",
+      energy: "Hybride",
+      power: "116 hp",
+    },
+    category: "citadine",
+    price: 23000,
+  },
+
+  {
+    image: "url_image_26",
+    brand: "Ford",
+    model: {
+      name: "Fiesta",
+      creationYear: new Date("1976-01-01"),
+      productionStop: null,
+    },
+    motorisation: {
+      name: "EcoBoost",
+      energy: "Essence",
+      power: "125 hp",
+    },
+    category: "citadine",
+    price: 18000,
+  },
+  {
+    image: "url_image_27",
+    brand: "Dacia",
+    model: {
+      name: "Sandero",
+      creationYear: new Date("2008-01-01"),
+      productionStop: null,
+    },
+    motorisation: {
+      name: "TCe",
+      energy: "Essence",
+      power: "90 hp",
+    },
+    category: "citadine",
+    price: 12000,
+  },
+  {
+    image: "url_image_28",
+    brand: "Nissan",
+    model: {
+      name: "Qashqai",
+      creationYear: new Date("2007-01-01"),
+      productionStop: null,
+    },
+    motorisation: {
+      name: "DIG-T",
+      energy: "Essence",
+      power: "160 hp",
+    },
+    category: "SUV",
+    price: 30000,
+  },
+  {
+    image: "url_image_29",
+    brand: "Opel",
+    model: {
+      name: "Corsa",
+      creationYear: new Date("1982-01-01"),
+      productionStop: null,
+    },
+    motorisation: {
+      name: "e-Edition",
+      energy: "Électrique",
+      power: "136 hp",
+    },
+    category: "citadine",
+    price: 24000,
+  },
+  {
+    image: "url_image_30",
+    brand: "Mercedes-Benz",
+    model: {
+      name: "A-Class",
+      creationYear: new Date("1997-01-01"),
+      productionStop: null,
+    },
+    motorisation: {
+      name: "AMG A 35",
+      energy: "Essence",
+      power: "306 hp",
+    },
+    category: "compacte",
+    price: 40000,
+  },
 ];
 
 console.log(mockData);
