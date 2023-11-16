@@ -210,7 +210,6 @@ const mockData = [
     category: "coupe",
     price: 60000,
   },
-
   {
     image: "url_image_1",
     brand: "Honda",
@@ -259,7 +258,6 @@ const mockData = [
     category: "berline",
     price: 55000,
   },
-
   {
     image: "url_image_11",
     brand: "Porsche",
@@ -420,7 +418,6 @@ const mockData = [
     category: "citadine",
     price: 23000,
   },
-
   {
     image: "url_image_26",
     brand: "Ford",
