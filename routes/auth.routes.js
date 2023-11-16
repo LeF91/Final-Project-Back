@@ -1,4 +1,5 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 const User = require("../models/User.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -21,9 +22,9 @@ router.post(
     try {
       // Get infos from req.body
       // username, password
-      console.log(req.body);
+      // console.log(req.body);
 
-      const { email, password } = req.body;
+      const { username, email, password, role, departement } = req.body;
       // 1- Is the password safe?
       const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
       if (!passwordRegex.test(password)) {
@@ -34,11 +35,11 @@ router.post(
       }
       // 2- Check if the user exist
       // The email might already be used
-      const foundUser = await User.findOne({ email: email });
+      const foundUser = await User.findOne({ username: username });
       if (foundUser) {
         return res
           .status(400)
-          .json({ message: `The email ${email} is already used.` });
+          .json({ message: `The username ${username} is already used.` });
       }
 
       // Hash the password
