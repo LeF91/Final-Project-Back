@@ -21,6 +21,7 @@ const vehiculeSchema = new Schema({
     type: String,
     enum: [
       "4x4",
+      "compacte",
       "SUV",
       "citadine",
       "berline",
