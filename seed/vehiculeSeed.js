@@ -1,6 +1,6 @@
 require("dotenv").config();
-require("./../db");
-const Vehicule = require("./../models/Vehicule.model");
+require("../db");
+const Vehicule = require("../models/Vehicule.model");
 const mockData = require("./vehicule-db");
 
 async function vehicule() {
