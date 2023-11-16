@@ -163,7 +163,7 @@ const mockData = [
   },
 
   {
-    image: "url_image_1",
+    image: "https://www.largus.fr/images/images/a4-avant-illustration.jpg",
     brand: "Audi",
     model: {
       name: "A4",
