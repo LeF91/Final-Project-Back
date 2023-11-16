@@ -12,7 +12,8 @@ router.use("/auth", require("./auth.routes"));
 router.use(isAuthenticated);
 router.use("/vehicule", require("./vehicule.routes"));
 router.use("/comments", require("./comments.routes"));
+// router.put("/comments", require("./comments.routes"));
 
-router.use("/:id", require("./user.routes"));
+router.use("/users", require("./user.routes"));
 
 module.exports = router;

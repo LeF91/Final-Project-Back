@@ -61,17 +61,19 @@ router.post(
 
 router.post("/login", async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    const foundUser = await User.findOne({ email }).select("password username");
+    const { username, password } = req.body;
+    const foundUser = await User.findOne({ username }).select(
+      "password username"
+    );
     if (!foundUser) {
-      next(error);
+      return res.status(400).json({ message: "Wrong credentials" });
     }
     const isPasswordCorrect = await bcrypt.compare(
       password,
       foundUser.password
     );
     if (!isPasswordCorrect) {
-      next(error);
+      return res.status(400).json({ message: "Wrong credentials" });
     }
 
     const payload = { _id: foundUser._id };
