@@ -14,17 +14,22 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/", isAuthenticated, isAdmin, async (req, res, next) => {
-  const vehicule = { ...req.body };
-  Vehicule.create(vehicule)
-    .then((createdvehicule) => {
-      res.status(201).json(createdvehicule);
-      console.log("Car created");
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
+router.post(
+  "/vehicule/create",
+  isAuthenticated,
+  isAdmin,
+  async (req, res, next) => {
+    const vehicule = { ...req.body };
+    Vehicule.create(vehicule)
+      .then((createdvehicule) => {
+        res.status(201).json(createdvehicule);
+        console.log("Car created");
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+);
 
 router.get("/:vehiculeId", async (req, res) => {
   const { vehiculeId } = req.params;

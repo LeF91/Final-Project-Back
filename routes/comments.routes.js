@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const Comment = require("./../models/Comment.model");
 
-router.get("/:carId", (req, res, next) => {
-  Comment.find({ vehicule: req.params.carId })
+router.get("/:vehiculeId", (req, res, next) => {
+  Comment.find({ vehicule: req.params.vehiculeId })
     .then((comments) => {
       console.log("Retrieved cars", comments);
       res.json(comments);
@@ -13,10 +13,10 @@ router.get("/:carId", (req, res, next) => {
     });
 });
 
-router.post("/:carId", async (req, res, next) => {
+router.post("/:vehiculeId", async (req, res, next) => {
   const comment = { ...req.body };
   comment.user = req.userId;
-  comment.vehicule = req.params.carId;
+  comment.vehicule = req.params.vehiculeId;
   Comment.create(comment)
     .then((createdcomment) => {
       res.status(201).json(createdcomment);
