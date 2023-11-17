@@ -1,18 +1,6 @@
 const router = require("express").Router();
 const Comment = require("./../models/Comment.model");
 
-router.get("/:vehiculeId", (req, res, next) => {
-  Comment.find({ vehicule: req.params.vehiculeId })
-    .then((comments) => {
-      console.log("Retrieved cars", comments);
-      res.json(comments);
-    })
-    .catch((error) => {
-      console.log(error, "Error to find cars", error);
-      next(error);
-    });
-});
-
 router.post("/:vehiculeId", async (req, res, next) => {
   const comment = { ...req.body };
   comment.user = req.userId;
@@ -23,6 +11,17 @@ router.post("/:vehiculeId", async (req, res, next) => {
       console.log("Car created");
     })
     .catch((error) => {
+      next(error);
+    });
+});
+router.get("/:vehiculeId", (req, res, next) => {
+  Comment.find({ vehicule: req.params.vehiculeId })
+    .then((comments) => {
+      console.log("Retrieved cars", comments);
+      res.json(comments);
+    })
+    .catch((error) => {
+      console.log(error, "Error to find cars", error);
       next(error);
     });
 });
