@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Vehicule = require("../models/Vehicule.model");
+const Comment = require("./../models/Comment.model");
 const { isAuthenticated, isAdmin } = require("../middleware/authMiddlewares");
 
 router.get("/", (req, res) => {
@@ -14,22 +15,22 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post(
-  "/vehicule/create",
-  isAuthenticated,
-  isAdmin,
-  async (req, res, next) => {
-    const vehicule = { ...req.body };
-    Vehicule.create(vehicule)
-      .then((createdvehicule) => {
-        res.status(201).json(createdvehicule);
-        console.log("Car created");
-      })
-      .catch((error) => {
-        next(error);
-      });
-  }
-);
+// router.post(
+//   "/vehicule/create",
+//   isAuthenticated,
+//   isAdmin,
+//   async (req, res, next) => {
+//     const vehicule = { ...req.body };
+//     Vehicule.create(vehicule)
+//       .then((createdvehicule) => {
+//         res.status(201).json(createdvehicule);
+//         console.log("Car created");
+//       })
+//       .catch((error) => {
+//         next(error);
+//       });
+//   }
+// );
 
 router.get("/:vehiculeId", async (req, res) => {
   const { vehiculeId } = req.params;
@@ -40,6 +41,32 @@ router.get("/:vehiculeId", async (req, res) => {
     })
     .catch((error) => {
       console.log(error, "Error to find cars", error);
+      next(error);
+    });
+});
+
+router.get("/:vehiculeId/comments", (req, res, next) => {
+  Comment.find({ vehicule: req.params.vehiculeId })
+    .then((comments) => {
+      console.log("Retrieved cars", comments);
+      res.json(comments);
+    })
+    .catch((error) => {
+      console.log(error, "Error to find cars", error);
+      next(error);
+    });
+});
+
+router.post("/:vehiculeId/comments", async (req, res, next) => {
+  const comment = { ...req.body };
+  comment.user = req.userId;
+  comment.vehicule = req.params.vehiculeId;
+  Comment.create(comment)
+    .then((createdcomment) => {
+      res.status(201).json(createdcomment);
+      console.log("Car created");
+    })
+    .catch((error) => {
       next(error);
     });
 });
