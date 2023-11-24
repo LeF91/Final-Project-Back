@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Comment = require("./../models/Comment.model");
 
-router.post("/:vehiculeId", async (req, res, next) => {
+router.post("/:vehiculeId/comments", async (req, res, next) => {
   const comment = { ...req.body };
   comment.user = req.userId;
   comment.vehicule = req.params.vehiculeId;
@@ -14,7 +14,7 @@ router.post("/:vehiculeId", async (req, res, next) => {
       next(error);
     });
 });
-router.get("/:vehiculeId", (req, res, next) => {
+router.get("/:vehiculeId/comments", (req, res, next) => {
   Comment.find({ vehicule: req.params.vehiculeId })
     .then((comments) => {
       console.log("Retrieved cars", comments);
@@ -27,7 +27,7 @@ router.get("/:vehiculeId", (req, res, next) => {
 });
 
 router.put("/:commentId", (req, res, next) => {
-  Comment.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  Comment.findByIdAndUpdate(req.params.commentId, req.body, { new: true })
     .then((updatedComment) => {
       res.json(updatedComment);
     })
@@ -37,7 +37,7 @@ router.put("/:commentId", (req, res, next) => {
 });
 
 router.delete("/:commentId", (req, res, next) => {
-  Comment.findByIdAndDelete(req.params.id, { new: true })
+  Comment.findByIdAndDelete(req.params.commentId, { new: true })
     .then(() => {
       res.status(200).json();
     })
