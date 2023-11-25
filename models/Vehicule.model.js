@@ -7,14 +7,14 @@ const vehiculeSchema = new Schema({
 
   model: {
     name: { type: String, required: true },
-    creationYear: { type: Date, required: true },
+    year: { type: Date, required: true },
     productionStop: { type: Date },
   },
 
   motorisation: {
-    name: { type: String, required: true },
+    name: { type: String },
     energy: { type: String, required: true },
-    power: { type: String, required: true },
+    power: { type: Number },
   },
 
   category: {
@@ -31,7 +31,7 @@ const vehiculeSchema = new Schema({
       "monospace",
       "sport",
     ],
-    required: true,
+    // required: true,
   },
 
   price: { type: Number, min: 0 },

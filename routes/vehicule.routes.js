@@ -15,24 +15,7 @@ router.get("/", (req, res) => {
     });
 });
 
-// router.post(
-//   "/vehicule/create",
-//   isAuthenticated,
-//   isAdmin,
-//   async (req, res, next) => {
-//     const vehicule = { ...req.body };
-//     Vehicule.create(vehicule)
-//       .then((createdvehicule) => {
-//         res.status(201).json(createdvehicule);
-//         console.log("Car created");
-//       })
-//       .catch((error) => {
-//         next(error);
-//       });
-//   }
-// );
-
-router.get("/:vehiculeId", async (req, res) => {
+router.get("/:vehiculeId", async (req, res, next) => {
   const { vehiculeId } = req.params;
   Vehicule.findById(vehiculeId)
     .then((vehicule) => {
@@ -40,7 +23,7 @@ router.get("/:vehiculeId", async (req, res) => {
       res.status(200).json(vehicule);
     })
     .catch((error) => {
-      console.log(error, "Error to find cars", error);
+      // console.log(error, "Error to find cars", error);
       next(error);
     });
 });
@@ -57,6 +40,18 @@ router.get("/:vehiculeId/comments", (req, res, next) => {
     });
 });
 
+router.post("/create", isAuthenticated, isAdmin, async (req, res, next) => {
+  const vehicule = { ...req.body };
+  Vehicule.create(vehicule)
+    .then((createdVehicule) => {
+      res.status(201).json(createdVehicule);
+      console.log("Car created");
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 router.post("/:vehiculeId/comments", async (req, res, next) => {
   const comment = { ...req.body };
   comment.user = req.userId;
@@ -64,7 +59,7 @@ router.post("/:vehiculeId/comments", async (req, res, next) => {
   Comment.create(comment)
     .then((createdcomment) => {
       res.status(201).json(createdcomment);
-      console.log("Car created");
+      console.log("Comment created");
     })
     .catch((error) => {
       next(error);
