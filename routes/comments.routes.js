@@ -30,7 +30,7 @@ const Comment = require("./../models/Comment.model");
 router.put("/:commentId", (req, res, next) => {
   Comment.findByIdAndUpdate(req.params.commentId, req.body, { new: true })
     .then((updatedComment) => {
-      res.json(updatedComment);
+      res.status(200).json(updatedComment);
     })
     .catch((error) => {
       next(error);
